@@ -1,0 +1,560 @@
+@font-face {
+	font-family: 'DS-DigitalNormal';
+	src: url('ds-digi-webfont.eot');
+	src: local('☺'), url('assets/font_digi.woff') format('woff'), 
+		url('assets/font_digi.ttf') format('truetype'), 
+		url('assets/font_digi.svg#webfont96AvQfz9') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+	font-size: 13px;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	color: #444;
+	-webkit-text-size-adjust: none;
+	background: #414141 url(assets/tex_top.gif) repeat-x top center;
+	width:100%;
+	height:100%;
+}
+
+#wrap {
+	width: 984px;
+	margin: 0 auto 48px;
+}
+
+a img {
+  border: 0px;
+}
+
+/*-------------------------------------------------------------------
+	Font Styles
+-------------------------------------------------------------------*/
+
+.digital {
+	color: #fe9359;
+	font-family: 'DS-DigitalNormal', sans-serif;
+	margin-top: 1px;
+	font-size: 26px;
+	letter-spacing: 3px;
+	text-shadow: #000 0px 0px 4px;
+}
+
+.digital.blue {
+	color: #7da2b5;
+}
+
+.label, .event-date {
+	color: #9c9c9c;
+	font-size: 10px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	line-height: 11px;
+}
+
+.label.white {
+	margin: 6px 0 8px;
+	color: #ddd;
+}
+
+h1 {
+	font-weight: normal;
+	font-size: 16px;
+	margin: 0 12px;
+	color: #bbb;
+	letter-spacing: 1px;
+	text-shadow: rgba(0,0,0,0.8) 1px -1px 1px;
+}
+
+/*-------------------------------------------------------------------
+	Shared Styles
+-------------------------------------------------------------------*/
+
+.round {
+	border-radius: 12px;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+}
+
+.bt {
+	color: #ccc;
+	font-size: 12px;
+	letter-spacing: 1px;
+	display: block;
+	text-decoration: none;
+	text-align: center;
+}
+
+.bt.arrow {
+	float: left;
+	background: rgba(0,0,0,0.2) url(assets/sprite.png) no-repeat -32px -128px;
+	height: 21px;
+	line-height: 21px;
+	padding: 0 16px 0 26px;
+	margin-right: 16px;
+	border-bottom: rgba(255,255,255,0.15) 1px solid;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-transition: background 0.2s linear;
+}
+
+.bt.arrow:hover {
+	background-color: rgba(200,200,200,0.2);
+}
+
+.separator-h {
+	background: url(assets/tile.png) repeat-x 0 -96px;
+	height: 2px;
+}
+
+.separator-v {
+	background: url(assets/sprite.png) no-repeat 0 -128px;
+	float: left;
+	width: 2px;
+	height: 46px;
+	margin-top: 1px;
+}
+
+.padTop {
+	margin-top: 32px;
+}
+
+.container {
+	padding: 16px 18px;
+}
+
+.graph-tip {
+	background: url(assets/tip.png) no-repeat;
+	width:132px;
+	height:61px;
+	position: absolute;
+	top: 100px;
+	left: 100px;
+	opacity: 0;
+	-webkit-transition: opacity 0.2s linear;
+}
+
+.graph-tip.hidden {
+	display: none;
+}
+
+.graph-tip.shown {
+	display: block;
+	opacity: 1;
+}
+
+.graph-tip .label {
+	float: left;
+	text-align: right;
+	text-transform: none;
+	letter-spacing: 0;
+	margin-top: 8px;
+	line-height: 16px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.graph-tip .left {
+	width: 79px;
+}
+
+.graph-tip .right {
+	width: 38px;
+}
+
+
+/*-------------------------------------------------------------------
+	Table Styles
+-------------------------------------------------------------------*/
+
+.list-container {
+	min-height: 128px;
+}
+
+table {	
+	border-spacing: 0;
+}
+
+th {
+	text-align:left;
+	padding: 4px 0px 10px 6px;
+	vertical-align:bottom;
+}
+
+th.small {
+	padding: 0;
+	text-align: center;
+}
+
+td {
+	padding: 12px 16px;
+	background: #2a2a2a;
+	color: #ddd;
+	border-left: 1px solid #232323;
+	border-right: 1px solid #393939;
+}
+
+td.small {
+	padding: 0;
+	text-align: center;
+}
+
+td:first-child {
+	border-left: none;
+}
+
+td:last-child {
+	border-right: none;
+}
+
+tr.spacer {
+	height: 3px;
+	background: none;
+}
+
+td.digital {
+	text-align: right;
+	text-shadow: none;
+}
+
+
+@-webkit-keyframes chart1 { 	from {height: 0p;} 	to {height:56px} }
+@-webkit-keyframes chart { 	from {opacity: 0} 	to {opacity:1;} }
+
+tr.chart td{
+	overflow: hidden;
+	-webkit-animation-duration: 0.5s;
+	-webkit-animation-timing-function: ease-out;
+	-webkit-animation-name: chart;
+	padding-left: 8px;
+}
+
+tr.chart, tr.graph-con {
+	display: block;
+	position: absolute;
+}
+
+tr.chart.animate, tr.graph-con.animate {
+	-webkit-transition: top 0.3s ease-in;
+}
+
+
+tr.chart td.chart {
+	padding: 6px 0 0 0;
+}
+
+tr.graph-con td {
+	display: block;
+	float: left;
+	height: 75px;
+	padding: 0;
+	vertical-align:middle;
+	margin-top: 0;
+}
+tr.graph-con .digital {
+	padding-top: 23px;
+	height: 52px;
+}
+
+.chart .team-name {
+	display: inline-block;
+	width: 90px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	vertical-align: top;
+	padding-top: 4px;
+}
+
+td.graph-container {
+	padding: 0;
+}
+
+td .graph {
+	height: 75px;
+	width: 490px;
+}
+
+.chart .icon {
+	margin: -3px 0 0 -2px;
+	width: 32px;
+	height: 28px;
+	display: inline-block;
+	-webkit-mask-image: url(assets/mask.png);
+}
+
+.chart .selected {
+	color: #888;
+	font-size: 10px;
+	margin: -8px 0 0 30px;
+}
+
+/*-------------------------------------------------------------------
+	Header Area
+-------------------------------------------------------------------*/
+
+#header {
+	background: url(assets/sprite.png) no-repeat 77% 0;
+	height: 80px;
+	margin: 0 20px;
+	padding-top: 24px;
+}
+
+.logo, .event-date {
+	float: left;
+}
+
+.logo.joyent {
+	float: right;
+}
+
+.event-date {
+	font-size: 12px;
+	margin: 36px 24px 0;
+	letter-spacing: 2px;
+	text-shadow: rgba(0,0,0,0.8) 1px -1px 1px;
+}
+
+#contest-info {
+	background: url(assets/tile.png) repeat-x;
+	height: 66px;
+	padding: 2px;
+	margin: 18px 16px;
+}
+
+#contest-info .inner {
+	background: url(assets/sprite.png) no-repeat 75% -192px, url(assets/tex_info.gif) repeat-x;
+	height: 50px;
+	padding: 8px 0;
+}
+
+#contest-info .section {
+	padding: 0px 32px;
+	float: left;
+}
+
+
+/*-------------------------------------------------------------------
+	TCP Map Area
+-------------------------------------------------------------------*/
+
+#map {
+	width: 100%;
+	height: 520px;
+}
+
+
+#tcp-activity td {
+	height: 36px;
+}
+
+/*-------------------------------------------------------------------
+	TCP Leaderboard area
+-------------------------------------------------------------------*/
+
+#tcp-leaderboard {
+	float: right;
+	border: #232323 2px solid;
+	background: url(assets/tile.png) 0 -128px repeat-x, url(assets/tex_tcp.gif);
+	width: 296px;
+	min-height: 128px;
+	padding: 3px;
+	margin-top: -60px;
+}
+
+#tcp-leaderboard .outer-container {
+	position: relative;
+	overflow: hidden;
+	height: 264px;
+	margin-top: 40px;
+}
+
+#tcp-leaderboard .inner-container {
+	position: absolute;
+	top: 0px;
+	-webkit-transition: ease-in 0.4s top;
+}
+
+#tcp-leaderboard .navigation {
+	height: 40px;
+}
+
+#tcp-leaderboard h1 {
+	margin: 12px 6px;
+}
+
+#tcp-leaderboard .item .icon {
+	width: 32px;
+	height: 32px;
+	float: left;
+	margin: -8px 0 0 -4px;
+	-webkit-mask-image: url(assets/mask.png);
+}
+
+#tcp-leaderboard .item {
+	position: absolute;
+	width: 300px;
+	color: #fff;
+	height: 53px;
+}
+
+#tcp-leaderboard .item.animate {
+	-webkit-transition: ease-in 0.3s top;
+}
+
+#tcp-leaderboard .section {
+	background: rgba(0,0,0,0.2);
+	-webkit-transition: background 0.3s ease-in;
+	border: none;
+	float:left;
+	width: 150px;
+	height: 34px;
+	padding: 8px;
+	margin-top: 0px;
+}
+
+
+#tcp-leaderboard .item.animate:hover .section {
+	background: rgba(200,200,200,0.2);
+	cursor: pointer;
+}
+
+#tcp-leaderboard .section.team-name {
+	padding-top: 18px;
+	height: 24px;
+	font-size: 11px;
+}
+
+#tcp-leaderboard .section.tcp-number {
+	width: 112px;
+	text-align: right;
+}
+
+#tcp-leaderboard .section:first-child {
+	border-right: #333333 solid 1px;
+}
+
+.navigation .bt {
+	float: left;
+	min-height: 20px;
+	text-align: center;
+	background: rgba(0,0,0,0.2);
+	height: 21px;
+	line-height: 21px;
+	padding: 0 16px;
+	margin: 10px 4px 4px;
+	border-bottom: rgba(255,255,255,0.15) 1px solid;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-transition: background 0.2s linear;
+}
+
+.navigation .bt:hover {
+	background-color: rgba(200,200,200,0.2);
+	cursor: pointer;
+}
+
+.navigation .bt.disabled {
+	opacity: 0.5;
+}
+
+.navigation .bt.disabled:hover {
+	background-color: rgba(0,0,0,0.2);
+}
+
+/*
+#tcp-leaderboard div:last-child .item .section:first-child {
+	border-radius: 0 0 0 12px;
+	-webkit-border-radius: 0 0 0 12px;
+	-moz-border-radius: 0 0 0 12px;
+}
+
+#tcp-leaderboard .item:last-child .section:last-child {
+	border-radius: 0 0 12px 0;
+	-moz-border-radius: 0 0 12px 0;
+	-webkit-border-radius: 0 0 12px 0;
+}*/
+
+/*-------------------------------------------------------------------
+	Commit Leaderboard area
+-------------------------------------------------------------------*/
+
+#commit .legends {
+	background: #2a2a2a;
+	height: 70px;
+	padding: 6px;
+	color: #666;
+	margin: 24px 0 20px;
+	font-size: 12px;
+}
+
+#commit .section {
+	padding: 8px 12px;
+	vertical-align: top;
+	float: left;
+	border-right: #222 1px solid;
+	height: 50px;
+}
+#commit .legends .graph {
+	margin-top: 4px;
+	background: url(assets/sprite.png) 0 -288px;
+	width:370px;
+	height: 40px;
+}
+
+#commit .legends .label {
+	color: #666;
+}
+
+#commit .legends .white-text {
+	font-size: 10px;
+	margin-top: 16px;
+	color: #ccc;
+}
+
+#commit .section:first-child {
+	border-right-color: #555;;
+}
+#commit .section:last-child {
+	border-right: none;
+}
+
+#commit-leaderboard td {
+	border-left: none;
+}
+
+.bt-scroll {
+	background: #343434;
+}
+
+table .subhead td {
+	padding: 2px 0;
+	text-align: center;
+	color: #888;
+	font-size: 10px;
+	background: #333333;
+	width: 40px;
+}
+
+table .subhead td:empty {
+	background: none;
+	border: none;
+	width: auto;
+}
+
+
+
+
+
+
